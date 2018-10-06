@@ -1,0 +1,56 @@
+SSH connection
+
+
+ssh -i "Secure1.pem" ubuntu@ec2-18-222-138-120.us-east-2.compute.amazonaws.com
+
+ssh -i "Secure1.pem" ubuntu@ec2-13-58-12-25.us-east-2.compute.amazonaws.com
+
+ssh -i "Secure1.pem" ubuntu@ec2-18-222-31-136.us-east-2.compute.amazonaws.com
+
+
+
+Procedure BUILD COLLINA (Ubuntu 16.04)
+
+
+//Non necessaire pour AWS
+sudo apt-get dist-upgrade
+//
+
+//Dependencies
+sudo apt update && sudo apt install build-essential cmake pkg-config libboost-all-dev libssl-dev libzmq3-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev doxygen graphviz libpcsclite-dev libpgm-dev
+//
+
+//Clone Git
+git clone https://github.com/Ano18092018/collina.git
+//
+
+//For low memory < 1GB
+sudo dd if=/dev/zero of=/var/swap.img bs=1024k count=1000
+sudo mkswap /var/swap.img
+sudo swapon /var/swap.img
+//
+
+//
+sudo make
+//
+
+cd build/release/src && sudo ./collinad
+
+
+Procédure BUILD COLLINAWALLET
+
+//
+sudo apt-get install qt5-default
+//
+
+//
+git clone https://github.com/Ano18092018/collinawallet.git
+//
+
+//
+ln -s ../collina cryptonote
+//
+
+//
+mkdir build && cd build && cmake .. && make
+//
